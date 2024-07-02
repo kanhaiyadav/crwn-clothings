@@ -1,5 +1,10 @@
 body{
     font-family: 'open sans', sans-serif;
-    background-color: #f3f3f3;
+    /* background-color: #f3f3f3; */
     padding: 20px 60px;
+}
+
+a{
+    text-decoration: none;
+    color: black;
 }
