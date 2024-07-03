@@ -29,6 +29,10 @@ class SignUp extends React.Component {
             return;
         }
         try {
+            //When you call createUserWithEmailAndPassword(email, password), Firebase Authentication verifies the provided email and password.
+            //If the email is not already associated with an existing account and the password meets the security requirements, Firebase Authentication 
+            //creates a new user record in its system.Upon successful creation, createUserWithEmailAndPassword returns a UserCredential object.
+            //This object contains a user property, which is a User object representing the newly created user.
             const { user } = await createUserWithEmailAndPassword(auth, email, password);
             await createUserProfileDocument(user, { displayName });
             this.setState({
