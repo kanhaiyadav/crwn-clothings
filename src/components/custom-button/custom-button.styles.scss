@@ -9,14 +9,12 @@
     background-color: black;
     color: white;
     text-transform: uppercase;
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-family: 'Arial Narrow', Arial, sans-serif;
     font-weight: bolder;
     border: none;
     cursor: pointer;
     display: flex;
     justify-content: center;
-    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana,
-        sans-serif;
     &:hover {
         background-color: white;
         color: black;

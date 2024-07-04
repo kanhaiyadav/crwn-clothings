@@ -4,7 +4,8 @@ import { Link } from "react-router-dom";
 import { ReactComponent as Logo } from '../../assests/crown.svg';
 import { auth } from "../../firebase/firebase.utils";
 import { useSelector } from "react-redux";
-
+import CartIcon from "../cart-icon/cart-icon.component";
+import CartDropDown from "../cart-drop-down/cart-drop-down.component";
 
 const Header = () => (
     <div className="header">
@@ -24,7 +25,11 @@ const Header = () => (
                     :
                     <Link className="option" to="/signin">SIGN IN</Link>
             }
+            <CartIcon />
         </div>
+        {
+            useSelector(state => state.cart.hidden)?null:<CartDropDown />
+        }
     </div>
 )
 
