@@ -3,7 +3,8 @@ import { addItemToCart } from "./cart_utils";
 
 const INITIAL_STATE = {
     hidden: true,
-    cartItems: []
+    cartItems: [],
+    itemsCount: 0,
 }
 
 const cartSlice = createSlice({
@@ -14,7 +15,8 @@ const cartSlice = createSlice({
             state.hidden = !state.hidden
         },
         addItem: (state, action) => {
-            state.cartItems = addItemToCart(state.cartItems, action.payload);   
+            state.cartItems = addItemToCart(state.cartItems, action.payload); 
+            state.itemsCount += 1;
         }
     }
 })

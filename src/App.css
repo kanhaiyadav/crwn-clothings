@@ -1,14 +1,30 @@
-body{
-    font-family: 'open sans', sans-serif;
+body {
+    font-family: "open sans", sans-serif;
     /* background-color: #f3f3f3; */
     padding: 20px 60px;
+    margin-top: 70px;
 }
 
-a{
+body::-webkit-scrollbar-track {
+    background: #dbdbdb;
+    border-radius: 13px;
+}
+body::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 13px;
+}
+body::-webkit-scrollbar {
+    width: 13px;
+}
+body::-webkit-scrollbar-thumb:hover {
+    background: #424242;
+}
+
+a {
     text-decoration: none;
     color: black;
 }
 
-*{
+* {
     box-sizing: border-box;
 }
