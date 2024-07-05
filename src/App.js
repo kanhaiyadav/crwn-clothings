@@ -10,6 +10,7 @@ import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 import { onSnapshot } from 'firebase/firestore';
 import { setCurrentUser } from './redux/user-reducer/user.reducer';
 import { connect } from 'react-redux';
+import CheckoutPage from './pages/CheckoutPage/checkout-page.component';
 
 
 const SneakersPage = () => (
@@ -53,6 +54,7 @@ class App extends React.Component {
                     <Route exact path='/sneakers' element={<SneakersPage />} />
                     <Route exact path='/shop' element={<ShopPage />} />
                     <Route exact path='/signin' element={this.props.currentUser?<Navigate to='/' />:<SignInSignUpPage  />} />
+                    <Route exact path='/checkout' element={<CheckoutPage />}/>
                 </Routes>
             </div>
         );
