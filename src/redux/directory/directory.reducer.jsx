@@ -43,5 +43,4 @@ const directorySlice = createSlice({
     reducers: {},
 });
 
-export const {} = directorySlice.actions;
 export default directorySlice.reducer;

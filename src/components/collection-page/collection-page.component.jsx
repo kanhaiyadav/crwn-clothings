@@ -4,7 +4,6 @@ import { useParams } from "react-router-dom";
 import { selectCollection } from "../../redux/shop/shop.selector";
 import { useSelector } from "react-redux";
 import CollectionItem from "../collection-item/collection-item.component";
-import StripCheckoutButton from "../stripe-button/stripe-button.component";
 
 
 const CollectionPage = () => {
