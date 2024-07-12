@@ -1,6 +1,6 @@
 import React from "react";
 import './header.component.styles.scss';
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import { ReactComponent as Logo } from '../../assests/crown.svg';
 import { auth } from "../../firebase/firebase.utils";
 import { useSelector } from "react-redux";
@@ -12,6 +12,7 @@ const Header = () => {
     const hidden = useSelector(selectHiddenState);
     const currentUser = useSelector(state => state.user.currentUser);
     return (
+        <>
         <div className="header">
             <Link className="logo-container" to="/">
                 <Logo className="logo" />
@@ -34,7 +35,9 @@ const Header = () => {
             {
                 hidden ? null : <CartDropDown />
             }
-        </div>
+            </div>
+            <Outlet />
+        </>
     )
 }
 

@@ -1,6 +1,8 @@
 import { combineReducers } from '@reduxjs/toolkit'
 import userReducer from "./user-reducer/user.reducer";
 import cartReducer from "./cart/cart.reducer";
+import directoryReducer from './directory/directory.reducer';
+import shopReducer from './shop/shop.reducer'
 
 //this makes our reducer persist
 import { persistReducer } from 'redux-persist';
@@ -25,7 +27,9 @@ const persistConfig = {
 //this is combining all the reducers into an giant object
 const rootReducer = combineReducers({
     user: userReducer,
-    cart: cartReducer
+    cart: cartReducer,
+    directory: directoryReducer,
+    shop: shopReducer
 })
 
 export default persistReducer(persistConfig, rootReducer);
