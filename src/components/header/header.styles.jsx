@@ -1,4 +1,14 @@
-.header {
+import { Link } from "react-router-dom";
+import styled, { css } from "styled-components";
+
+
+//defining a block of css code 
+const OptionContainerStyles = css`
+    padding: 10px 15px;
+    cursor: pointer;
+`
+
+export const HeaderComponent = styled.div`
     height: 70px;
     width: 100%;
     display: flex;
@@ -10,29 +20,24 @@
     z-index: 100;
     background-color: rgba(255, 255, 255, 0.85);
     padding:0px 30px;
-}
+`;
 
-.logo-container {
+
+export const LogoContainer = styled(Link)`
     height: 100px;
     width: 100px;
     padding: 25px;
     display: grid;
     place-items: center;
-    .logo{
-        width: 100%;
-        height: 100%;
-    }
-}
-
-.options {
+`
+export const OpitonContainer = styled.div`
     width: 50%;
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: flex-end;
+`
 
-    .option {
-        padding: 10px 15px;
-        cursor: pointer;
-    }
-}
+export const OptionLink = styled(Link)`
+    ${OptionContainerStyles}
+`

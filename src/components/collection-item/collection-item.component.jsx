@@ -6,7 +6,6 @@ import { addItem } from "../../redux/cart/cart.reducer";
 
 const CollectionItem = ({item}) => {
     const { name, price, imageUrl } = item;
-    console.log(item);
     const dispatch = useDispatch();
     const handleClick = () => {
         dispatch(addItem(item));

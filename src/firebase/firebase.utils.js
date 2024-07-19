@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
+import { getFirestore, doc, getDoc, setDoc, collection, writeBatch } from "firebase/firestore";
 
 
 // Your web app's Firebase configuration
@@ -20,6 +20,24 @@ const app = initializeApp(config);
 // Initialize Firebase services
 export const auth = getAuth(app);
 export const firestore = getFirestore(app); 
+
+
+export const convertCollectionstoMap = (collections) => {
+    const transformedCollection = collections.docs.map(doc => {
+        const { title, items } = doc.data();
+        return {
+            routeName: encodeURI(title.toLowerCase()),
+            id: doc.id,
+            title,
+            items
+        }
+    })
+    return transformedCollection.reduce((accumulator, collection) => {
+        accumulator[collection.title.toLowerCase()] = collection;
+        return accumulator
+    }, {})
+    
+}
 
 export const createUserProfileDocument = async (userAuth, additionalData) => {
     if (!userAuth) return;
@@ -43,6 +61,18 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
     return userRef;
 }
 
+export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => {
+    console.log(objectsToAdd);
+    const collectionRef = collection(firestore, collectionKey);
+    const batch = writeBatch(firestore);
+    objectsToAdd.forEach((obj) => {
+        console.log(obj);
+        const newdocRef = doc(collectionRef);
+        batch.set(newdocRef, obj);
+    })
+
+    return await batch.commit();
+}
 
 
 // Configure Google Auth Provider

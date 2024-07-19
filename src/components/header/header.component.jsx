@@ -1,41 +1,43 @@
 import React from "react";
-import './header.component.styles.scss';
-import { Link, Outlet } from "react-router-dom";
+// import './header.component.styles.scss';
+import { Outlet } from "react-router-dom";
 import { ReactComponent as Logo } from '../../assests/crown.svg';
 import { auth } from "../../firebase/firebase.utils";
 import { useSelector } from "react-redux";
 import CartIcon from "../cart-icon/cart-icon.component";
 import CartDropDown from "../cart-drop-down/cart-drop-down.component";
 import { selectHiddenState } from "../../redux/cart/cart-selector";
+import { HeaderComponent, LogoContainer, OpitonContainer, OptionLink } from "./header.styles";
+
 
 const Header = () => {
     const hidden = useSelector(selectHiddenState);
     const currentUser = useSelector(state => state.user.currentUser);
     return (
         <>
-        <div className="header">
-            <Link className="logo-container" to="/">
-                <Logo className="logo" />
-            </Link>
-            <div className="options">
-                <Link className="option" to="/shop">
-                    SHOP
-                </Link>
-                <Link className="option" to="/shop">
-                    CONTACT
-                </Link>
+            <HeaderComponent>
+                <LogoContainer to="/">
+                    <Logo className="logo" />
+                </LogoContainer>
+                <OpitonContainer>
+                    <OptionLink to="/shop">
+                        SHOP
+                    </OptionLink>
+                    <OptionLink to="/shop">
+                        CONTACT
+                    </OptionLink>
+                    {
+                        currentUser ?
+                            <OptionLink as='div' onClick={() => auth.signOut()}>SIGN OUT</OptionLink>
+                            :
+                            <OptionLink to="/signin">SIGN IN</OptionLink>
+                    }
+                    <CartIcon />
+                </OpitonContainer>
                 {
-                     currentUser?
-                        <div className="option" onClick={() => auth.signOut()}>SIGN OUT</div>
-                        :
-                        <Link className="option" to="/signin">SIGN IN</Link>
+                    hidden ? null : <CartDropDown />
                 }
-                <CartIcon />
-            </div>
-            {
-                hidden ? null : <CartDropDown />
-            }
-            </div>
+            </HeaderComponent>
             <Outlet />
         </>
     )

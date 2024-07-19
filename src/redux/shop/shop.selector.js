@@ -1,25 +1,25 @@
 import { createSelector } from "reselect";
 
-const CollectionIdMap = {
-    hats: '1',
-    sneakers: '2',
-    jakets: '3',
-    wonmens: '4', 
-    mens: '5'
-}
-
 const selectShop = (state) => state.shop;
 
+export const selectLoading = createSelector(
+    [selectShop],
+    (shop) => shop.isLoading
+)
 
 export const selectCollections = createSelector(
     [selectShop],
-    (shop) => shop.collections
+    (shop) => Object.values(shop.collections)
 )
 
 
-export const selectCollection = (urlParams) =>
-    createSelector(
+export const selectCollection = (urlParams) => {
+    return createSelector(
         [selectCollections],
-        (collections) => collections.find((collection) => collection.id === CollectionIdMap[urlParams])
+        (collections) => {
+            console.log(collections)
+            return collections[urlParams]
+        }
     )
+}
 

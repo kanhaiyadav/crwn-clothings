@@ -7,23 +7,27 @@ import CollectionItem from "../collection-item/collection-item.component";
 
 
 const CollectionPage = () => {
-    const collection = useSelector(selectCollection(useParams().id)).items;
-    return (
-        <div>
-            <h1>Collection Page</h1>
-            <div className="preview">
-                {
-                    collection
-                        .map((item) => (
-                            <CollectionItem
-                                key={item.id}
-                                item={item}
-                            />
-                        ))
-                }
-            </div>
-        </div>
-    )
-}
+    let collection = useSelector(selectCollection(useParams().id));
+    if (collection) {
 
+        collection = collection.items;
+
+        return (
+            <div>
+                <h1>Collection Page</h1>
+                <div className="preview">
+                    {
+                        collection
+                            .map((item) => (
+                                <CollectionItem
+                                    key={item.id}
+                                    item={item}
+                                />
+                            ))
+                    }
+                </div>
+            </div>
+        )
+    }
+}
 export default CollectionPage;

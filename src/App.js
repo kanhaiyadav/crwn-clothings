@@ -4,13 +4,17 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import Header from './components/header/header.component';
 import SignInSignUpPage from './pages/signin_signup-page/signin_signup-page.component';
 import React from 'react';
-import { auth, createUserProfileDocument } from './firebase/firebase.utils';
+import { auth, createUserProfileDocument} from './firebase/firebase.utils';
 import { onSnapshot } from 'firebase/firestore';
 import { setCurrentUser } from './redux/user-reducer/user.reducer';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import CheckoutPage from './pages/CheckoutPage/checkout-page.component';
 import CollectionPage from './components/collection-page/collection-page.component';
 import ShopPage from './pages/ShopPage/ShopPage.component';
+import WithSpinner from './components/with-spinner/with-spinner.styles';
+import { selectLoading } from './redux/shop/shop.selector';
+
+const CollectionPageWithSpinner = WithSpinner(CollectionPage);
 
 class App extends React.Component {
     unSubscribeFromAuth = null;
@@ -43,14 +47,13 @@ class App extends React.Component {
     render() {
         return (
             <div>
-                <Header currentUser />
                 <Routes>
                     <Route path='/' element={<Header />}>
                         <Route index element={<HomePage />} />
-                        <Route path='/:id' element={<CollectionPage />} />
-                        <Route path='/shop' element={<ShopPage />} />
-                        <Route path='/signin' element={this.props.currentUser ? <Navigate to='/' /> : <SignInSignUpPage />} />
-                        <Route path='/checkout' element={<CheckoutPage />} />
+                        <Route path='shop' element={<ShopPage />} />
+                        <Route path='shop/:id' element={<CollectionPageWithSpinner isLoading={this.props.isLoading} />} />
+                        <Route path='signin' element={this.props.currentUser ? <Navigate to='/' /> : <SignInSignUpPage />} />
+                        <Route path='checkout' element={<CheckoutPage />} />
                     </Route>
                 </Routes>
             </div>
@@ -59,7 +62,8 @@ class App extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-    currentUser: state.user.currentUser
+    currentUser: state.user.currentUser,
+    isLoading: state.shop.isLoading
 })
 
 const mapDispatchToProps = {
