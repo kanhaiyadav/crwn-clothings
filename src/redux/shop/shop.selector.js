@@ -9,13 +9,19 @@ export const selectLoading = createSelector(
 
 export const selectCollections = createSelector(
     [selectShop],
-    (shop) => Object.values(shop.collections)
+    (shop) => {
+       return Object.values(shop.collections)
+    }
+)
+export const selectCollectionsMap = createSelector(
+    [selectShop],
+    (shop) => shop.collections
 )
 
 
 export const selectCollection = (urlParams) => {
     return createSelector(
-        [selectCollections],
+        [selectCollectionsMap],
         (collections) => {
             console.log(collections)
             return collections[urlParams]

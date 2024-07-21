@@ -7,14 +7,10 @@ import React from 'react';
 import { auth, createUserProfileDocument} from './firebase/firebase.utils';
 import { onSnapshot } from 'firebase/firestore';
 import { setCurrentUser } from './redux/user-reducer/user.reducer';
-import { connect, useSelector } from 'react-redux';
+import { connect } from 'react-redux';
 import CheckoutPage from './pages/CheckoutPage/checkout-page.component';
 import CollectionPage from './components/collection-page/collection-page.component';
 import ShopPage from './pages/ShopPage/ShopPage.component';
-import WithSpinner from './components/with-spinner/with-spinner.styles';
-import { selectLoading } from './redux/shop/shop.selector';
-
-const CollectionPageWithSpinner = WithSpinner(CollectionPage);
 
 class App extends React.Component {
     unSubscribeFromAuth = null;
@@ -51,7 +47,7 @@ class App extends React.Component {
                     <Route path='/' element={<Header />}>
                         <Route index element={<HomePage />} />
                         <Route path='shop' element={<ShopPage />} />
-                        <Route path='shop/:id' element={<CollectionPageWithSpinner isLoading={this.props.isLoading} />} />
+                        <Route path='shop/:id' element={<CollectionPage />} />
                         <Route path='signin' element={this.props.currentUser ? <Navigate to='/' /> : <SignInSignUpPage />} />
                         <Route path='checkout' element={<CheckoutPage />} />
                     </Route>
