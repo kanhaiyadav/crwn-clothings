@@ -1,6 +1,10 @@
 import { configureStore} from "@reduxjs/toolkit";
 import rootReducer from "./root-reducer";
 import { persistStore } from "redux-persist";
+import createSagaMiddleware from 'redux-saga';
+import { fetchCollectionsStart } from "./shop/shopSagas";
+
+const sagaMiddleware = createSagaMiddleware();
 
 const store = configureStore(
     {
@@ -15,9 +19,11 @@ const store = configureStore(
                     // Ignore these paths in the state
                     ignoredPaths: ['register', 'rehydrate'],
                 },
-            }),
+            }).concat(sagaMiddleware),
     }
 )
+
+sagaMiddleware.run(fetchCollectionsStart);
 
 //this just creates a persisted verion of our store
 const persistor = persistStore(store);

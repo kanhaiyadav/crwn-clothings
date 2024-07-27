@@ -10,13 +10,14 @@ const shopSlice = createSlice({
     reducers: {
 
         updateCollections: (state, action) => {
+            console.log("fetching...");
             state.collections = action.payload
         },
         setLoading: (state) => {
             state.isLoading = false
-        }
+        },
     }
 })
 
-export const { updateCollections , setLoading} = shopSlice.actions
+export const { fetchDAta, updateCollections , setLoading} = shopSlice.actions
 export default shopSlice.reducer;
